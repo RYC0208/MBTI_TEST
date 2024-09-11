@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import AuthForm from "../components/AuthForm";
-import { login as apiLogin } from "../api/auth";
+import AuthForm from "../components/AuthFor
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
@@ -12,8 +11,7 @@ const Login = () => {
 
   const handleLogin = async (formData) => {
     try {
-      const response = await apiLogin(formData);
-      login(response.accessToken);
+      await login(formData);
       navigate("/");
     } catch (error) {
       alert(`로그인 실패 : ${error.message}`);
