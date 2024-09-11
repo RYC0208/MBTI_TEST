@@ -34,38 +34,29 @@ const useAuthStore = create((set, get) => ({
   },
 
   fetchProfile: async () => {
-    try {
-      const { token, isAuthenticated } = get();
-      if (token && isAuthenticated) {
-        const userData = await getUserProfile(token);
-        set({ profile: userData });
-      }
-    } catch (error) {
-      console.log("프로필 정보를 가져오지 못했습니다 : ", error);
-      throw error;
+    const { token, isAuthenticated } = get();
+    if (token && isAuthenticated) {
+      const userData = await getUserProfile(token);
+      set({ profile: userData });
     }
   },
 
   updateProfile: async (newNickname) => {
     const { profile, token } = get();
-    try {
-      const formData = new FormData();
-      formData.append("nickname", newNickname);
+    const formData = new FormData();
+    formData.append("nickname", newNickname);
 
-      const response = await updateProfile(token, formData);
-      if (response.success) {
-        set({
-          profile: {
-            ...profile,
-            nickName: response.nickname,
-          },
-        });
-        return response.success;
-      } else {
-        return response.success;
-      }
-    } catch (error) {
-      console.error("프로필 수정 에러 =>", error);
+    const response = await updateProfile(token, formData);
+    if (response.success) {
+      set({
+        profile: {
+          ...profile,
+          nickName: response.nickname,
+        },
+      });
+      return response.success;
+    } else {
+      return response.success;
     }
   },
 }));
