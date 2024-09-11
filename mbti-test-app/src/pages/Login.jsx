@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthForm from "../components/AuthFor
+import AuthForm from "../components/AuthForm";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
