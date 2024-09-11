@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getUserProfile } from "../api/auth";
+import { apiLogin, getUserProfile } from "../api/auth";
 
 export const AuthContext = createContext();
 
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
           const userData = await getUserProfile(token);
           setUser(userData);
           localStorage.setItem("user", JSON.stringify(userData));
+          console.log(user);
         }
       } catch (error) {
         console.error("프로필 정보를 가져오지 못했습니다:", error);
@@ -28,8 +29,9 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
-  const login = (token) => {
-    localStorage.setItem("accessToken", token);
+  const login = async (formData) => {
+    const response = await apiLogin(formData);
+    localStorage.setItem("accessToken", response.accessToken);
     setIsAuthenticated(true);
   };
 

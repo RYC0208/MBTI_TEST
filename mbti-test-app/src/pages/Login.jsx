@@ -1,20 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import AuthForm from "../components/AuthForm";
-import { login as apiLogin } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import useAuthStore from "../zustand/authStore";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogin = async (formData) => {
     try {
-      const response = await apiLogin(formData);
-      login(response.accessToken);
-      navigate("/");
+      const response = await login(formData);
+      if (response) {
+        navigate("/");
+      } else {
+        alert("로그인 실패");
+      }
     } catch (error) {
       alert(`로그인 실패 : ${error.message}`);
     }

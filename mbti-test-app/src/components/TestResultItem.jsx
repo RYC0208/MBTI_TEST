@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { AuthContext } from "../contexts/AuthContext";
 import { MBTI_DESCRIPTIONS } from "../data/decriptons";
 import { MbtiContext } from "../contexts/MBTIContext";
 
-const TestResultItem = ({ item }) => {
-  const { userDataLocal } = useContext(AuthContext);
+const TestResultItem = ({ item, userId }) => {
   const { deleteTestResult, updateVisibility } = useContext(MbtiContext);
 
   return (
@@ -17,7 +15,7 @@ const TestResultItem = ({ item }) => {
       <div className="itemMiddle">
         <h1>{item.result}</h1>
         <p>{MBTI_DESCRIPTIONS[item.result].description}</p>
-        {item.userId === userDataLocal.id && (
+        {item.userId === userId && (
           <div className="buttonArea">
             <button
               className="deleteButton"
