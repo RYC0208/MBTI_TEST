@@ -41,7 +41,7 @@ const MyPage = () => {
         alert("닉네임 변경에 실패했습니다.");
       }
     } catch (error) {
-      console.error("Failed to update nickname:", error);
+      console.error("닉네임 수정 실패 :", error);
     }
   };
 
