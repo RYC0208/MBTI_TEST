@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getUserProfile } from "../api/auth";
+import { apiLogin, getUserProfile } from "../api/auth";
 
 export const AuthContext = createContext();
 
@@ -28,8 +28,9 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
-  const login = (token) => {
-    localStorage.setItem("accessToken", token);
+  const login = async (formData) => {    
+    const response = await apiLogin(formData);
+    localStorage.setItem("accessToken", response.accessToken);
     setIsAuthenticated(true);
   };
 
