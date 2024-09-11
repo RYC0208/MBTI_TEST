@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import TestResultList from "./../components/TestResultList";
 import styled from "styled-components";
-import { MbtiContext } from "../contexts/MBTIContext";
+import useMbtiStore from "../zustand/mbtiStore";
 
 const TestResult = () => {
-  const { testResults } = useContext(MbtiContext); // 이제 제대로 구조 분해 가능
+  const { testResults, fetchTestResults } = useMbtiStore();
+
+  useEffect(() => {
+    fetchTestResults();
+  }, [testResults]);
 
   return (
     <TestResultContainer>
@@ -18,7 +22,9 @@ export default TestResult;
 
 const TestResultContainer = styled.div`
   width: 100%;
+  min-height: 800px;
   background-color: white;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;

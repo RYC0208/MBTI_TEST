@@ -14,6 +14,25 @@ const useAuthStore = create((set, get) => ({
   token: null,
   profile: null,
 
+  login: async (formData) => {
+    const response = await apiLogin(formData);
+    localStorage.setItem("token", response.accessToken);
+    localStorage.setItem("user", JSON.stringify(response));
+    set({ isAuthenticated: true, token: response.accessToken, user: response });
+    return response;
+  },
+
+  logout: () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    set({ isAuthenticated: false, user: null, token: null });
+  },
+
+  register: async (formData) => {
+    const response = await registerApi(formData);
+    return response;
+  },
+
   fetchProfile: async () => {
     try {
       const { token, isAuthenticated } = get();
@@ -48,25 +67,6 @@ const useAuthStore = create((set, get) => ({
     } catch (error) {
       console.error("프로필 수정 에러 =>", error);
     }
-  },
-
-  login: async (formData) => {
-    const response = await apiLogin(formData);
-    localStorage.setItem("token", response.accessToken);
-    localStorage.setItem("user", JSON.stringify(response));
-    set({ isAuthenticated: true, token: response.accessToken, user: response });
-    return response;
-  },
-
-  logout: () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    set({ isAuthenticated: false, user: null, token: null });
-  },
-
-  register: async (formData) => {
-    const response = await registerApi(formData);
-    return response;
   },
 }));
 

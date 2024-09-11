@@ -13,7 +13,7 @@ const Test = () => {
   const handleTestSubmit = async (answers) => {
     const result = calculateMBTI(answers);
     const resultData = {
-      userId: user.id,
+      userId: user.userId,
       nickname: user.nickname,
       result,
       date: new Date().toLocaleString("en-US", {
@@ -28,7 +28,7 @@ const Test = () => {
       visibility: true,
     };
     await createTestResult(resultData);
-    navigate("/testresult");
+    navigate("/mytestresult");
   };
 
   return (

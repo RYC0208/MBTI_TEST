@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { MBTI_DESCRIPTIONS } from "../data/decriptons";
-import { MbtiContext } from "../contexts/MBTIContext";
+import useMbtiStore from "../zustand/mbtiStore";
 
 const TestResultItem = ({ item, userId }) => {
-  const { deleteTestResult, updateVisibility } = useContext(MbtiContext);
-
+  const { deleteTestResult, updateVisibility } = useMbtiStore();
   return (
     <ItemContainer>
       <div className="itemTop">

@@ -11,6 +11,7 @@ import TestResult from "../pages/TestResult";
 import Home from "../pages/Home";
 import { styled } from "styled-components";
 import { MbtiProvider } from "../contexts/MBTIContext";
+import MyTestResult from "../pages/MyTestResult";
 
 const Router = () => {
   return (
@@ -47,6 +48,7 @@ const Router = () => {
                     </ProtectedRoute>
                   }
                 />
+                <Route path="/mytestresult" element={<MyTestResult />} />
               </Route>
             </Routes>
           </RoutesArea>
