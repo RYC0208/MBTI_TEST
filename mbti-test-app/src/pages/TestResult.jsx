@@ -6,7 +6,7 @@ import { useTestResults } from "../hooks/mbtiQueries";
 
 const TestResult = () => {
   const { data: testResults, isLoading, error } = useTestResults();
-  
+
   // const { fetchTestResults } = useMbtiStore();
   // useEffect(() => {
   //   fetchTestResults();
