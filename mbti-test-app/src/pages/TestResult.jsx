@@ -1,26 +1,10 @@
 import React, { useContext } from "react";
 import TestResultList from "./../components/TestResultList";
 import styled from "styled-components";
-<<<<<<< tanstackQuery
 import { MbtiContext } from "../contexts/MBTIContext";
 
 const TestResult = () => {
   const { testResults } = useContext(MbtiContext); // 이제 제대로 구조 분해 가능
-=======
-import useMbtiStore from "../zustand/mbtiStore";
-import { useTestResults } from "../hooks/mbtiQueries";
-
-const TestResult = () => {
-  const { data: testResults, isLoading, error } = useTestResults();
-  
-  // const { fetchTestResults } = useMbtiStore();
-  // useEffect(() => {
-  //   fetchTestResults();
-  // }, [testResults]);
-
-  if (isLoading) return <div>로딩중</div>;
-  if (error) return console.error("로딩중에 에러났음 =>", error);
->>>>>>> local
 
   return (
     <TestResultContainer>
