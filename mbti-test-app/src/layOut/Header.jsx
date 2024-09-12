@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContext } from "../contexts/AuthContext";
+import useAuthStore from "../zustand/authStore";
 
 const Header = () => {
-  const { isAuthenticated, logout, token } = useContext(AuthContext);
+  const { isAuthenticated, logout, token } = useAuthStore();
 
   return (
     <HeaderContainer>
@@ -57,7 +57,7 @@ const HeaderContainer = styled.div`
   background-color: white;
   padding-left: 60px;
   padding-right: 60px;
-  p{
+  p {
     color: #ff4b4b;
     font-size: 15px;
   }
@@ -67,12 +67,12 @@ const HeaderContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
+
     .buttonArea {
       display: flex;
       gap: 20px;
 
-      a{
+      a {
         display: flex;
         flex-direction: column;
         align-items: center;

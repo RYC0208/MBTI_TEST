@@ -33,14 +33,19 @@
       "visibility": true
     },
     {
-      "id": "28ba",
-      "userId": "ryc123",
-      "nickname": "867022",
       "id": "8f3c",
       "userId": "ryc456",
       "nickname": "zzzz",
       "result": "ESTJ",
       "date": "09/11/2024, 01:35:20 PM",
+      "visibility": false
+    },
+    {
+      "id": "28ba",
+      "userId": "ryc456",
+      "nickname": "zzzz",
+      "result": "ESTJ",
+      "date": "09/12/2024, 11:48:37 AM",
       "visibility": true
     }
   ]
