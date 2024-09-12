@@ -1,20 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import TestForm from "../components/TestForm";
 import { calculateMBTI } from "../utils/mbtiCalculator";
 import { createTestResult } from "../api/testResult";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
 import styled from "styled-components";
+import useAuthStore from "../zustand/authStore";
 
 const Test = () => {
-  const { userDataLocal } = useContext(AuthContext);
+  const { user } = useAuthStore();
   const navigate = useNavigate();
-  
+
   const handleTestSubmit = async (answers) => {
     const result = calculateMBTI(answers);
     const resultData = {
-      userId: userDataLocal.id,
-      nickname: userDataLocal.nickname,
+      userId: user.userId,
+      nickname: user.nickname,
       result,
       date: new Date().toLocaleString("en-US", {
         year: "numeric",
@@ -28,7 +28,7 @@ const Test = () => {
       visibility: true,
     };
     await createTestResult(resultData);
-    navigate("/testresult");
+    navigate("/mytestresult");
   };
 
   return (

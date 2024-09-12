@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import TestResultList from "./../components/TestResultList";
 import styled from "styled-components";
-import useMbtiStore from "../zustand/mbtiStore";
+// import useMbtiStore from "../zustand/mbtiStore";
 import { useTestResults } from "../hooks/mbtiQueries";
 
 const TestResult = () => {

@@ -1,47 +1,23 @@
-import React, { useEffect, useState, useContext } from "react";
-import { getUserProfile, updateProfile } from "../api/auth";
-import { AuthContext } from "../contexts/AuthContext";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import useAuthStore from "../zustand/authStore";
 
 const MyPage = () => {
-  const { isAuthenticated, token } = useContext(AuthContext);
-  const [profile, setProfile] = useState(null);
+  const { fetchProfile, profile, updateProfile } = useAuthStore();
   const [newNickname, setNewNickname] = useState("");
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        if (token && isAuthenticated) {
-          const userData = await getUserProfile(token);
-          setProfile(userData);
-        }
-      } catch (error) {
-        console.error("프로필 정보를 가져오지 못했습니다:", error);
-      }
-    };
-
     fetchProfile();
-  }, [isAuthenticated]);
+  }, [profile]);
 
-  const handleNicknameChange = async (e) => {
+  const HandleUpdateProfile = async (e) => {
     e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("nickname", newNickname);
-
-      const response = await updateProfile(token, formData);
-      if (response.success) {
-        setProfile((prevState) => ({
-          ...prevState,
-          nickname: response.nickname,
-        }));
-        alert("닉네임이 변경되었습니다.");
-        setNewNickname("");
-      } else {
-        alert("닉네임 변경에 실패했습니다.");
-      }
-    } catch (error) {
-      console.error("Failed to update nickname:", error);
+    const result = await updateProfile(newNickname);
+    if (result) {
+      alert("닉네임이 변경되었습니다.");
+      setNewNickname("");
+    } else {
+      alert("닉네임 변경에 실패했습니다.");
     }
   };
 
@@ -52,7 +28,7 @@ const MyPage = () => {
   return (
     <MyPageContainer>
       <h1>프로필 수정</h1>
-      <form onSubmit={handleNicknameChange}>
+      <form onSubmit={HandleUpdateProfile}>
         <div className="nicknameArea">
           <span>닉네임</span>
           <input
